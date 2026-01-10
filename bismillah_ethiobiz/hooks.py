@@ -9,7 +9,10 @@ app_license = "MIT"
 # ------------------
 
 # include js, css files in header of desk.html
-app_include_css = "/assets/bismillah_ethiobiz/css/bismillah_ethiobiz.css"
+app_include_css = [
+    "/assets/bismillah_ethiobiz/css/bismillah_ethiobiz.css",
+    "/assets/bismillah_ethiobiz/css/generated_theme.css"
+]
 app_include_js = "/assets/bismillah_ethiobiz/js/bismillah_ethiobiz.js"
 
 # Client-side bindings

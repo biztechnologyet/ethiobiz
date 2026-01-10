@@ -16,7 +16,7 @@
   "fieldname": "custom_company",
   "fieldtype": "Link",
   "options": "Company",
-  "label": "Allowed Company",
+  "label": "Company",
   "insert_after": "bio",
   "doctype": "Custom Field",
   "name": "User-custom_company"

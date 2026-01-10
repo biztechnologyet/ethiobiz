@@ -1,7 +1,3 @@
 Bismillah EthioBiz
-Bismillah Tibeb
-Bismillah Dagu
-Bismillah Magala
-Bismillah Walta
-Bismillah Afocha
+EthioBiz Theme
 Letter Module
