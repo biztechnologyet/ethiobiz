@@ -51,10 +51,11 @@
     ssh user@ethiobiz.et
     ```
 
-3.  **Get the App**
-    Execute inside the bench container:
+2.  **Upload the App**
+    Copy the `bismillah_ethiobiz` folder to the `apps` directory of your bench.
     ```bash
-    bench get-app https://github.com/biztechnologyet/ethiobiz
+    cd /workspace/frappe-bench/apps
+    # Clone or copy folder here
     ```
 
 3.  **Install the App**

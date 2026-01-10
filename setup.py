@@ -9,7 +9,6 @@ setup(
     description="Custom EthioBiz ERPNext Customizations for Ethiopian Market",
     author="Bismillah",
     author_email="info@ethiobiz.et",
-    url="https://github.com/biztechnologyet/ethiobiz",
     packages=find_packages(),
     zip_safe=False,
     include_package_data=True,
