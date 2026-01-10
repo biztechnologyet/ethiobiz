@@ -1,83 +1,193 @@
 {
- "name": "EthioBiz Theme",
- "module": "EthioBiz Theme",
- "custom": 1,
- "docstatus": 0,
- "doctype": "DocType",
- "issingle": 1,
- "fields": [
-  {
-   "fieldname": "section_branding",
-   "fieldtype": "Section Break",
-   "label": "Branding"
-  },
-  {
-   "fieldname": "app_logo",
-   "fieldtype": "Attach Image",
-   "label": "App Logo"
-  },
-  {
-   "fieldname": "app_name",
-   "fieldtype": "Data",
-   "label": "App Name (Brand Name)",
-   "default": "EthioBiz"
-  },
-  {
-   "fieldname": "section_colors",
-   "fieldtype": "Section Break",
-   "label": "Colors"
-  },
-  {
-   "fieldname": "primary_color",
-   "fieldtype": "Color",
-   "label": "Primary Color",
-   "default": "#2490ef"
-  },
-  {
-   "fieldname": "navbar_bg_color",
-   "fieldtype": "Color",
-   "label": "Navbar Background Color",
-   "default": "#FFFFFF"
-  },
-  {
-   "fieldname": "navbar_text_color",
-   "fieldtype": "Color",
-   "label": "Navbar Text Color",
-   "default": "#000000"
-  },
-  {
-   "fieldname": "background_color",
-   "fieldtype": "Color",
-   "label": "Background Color",
-   "default": "#F4F5F7"
-  },
-  {
-   "fieldname": "section_advanced",
-   "fieldtype": "Section Break",
-   "label": "Advanced CSS"
-  },
-  {
-   "fieldname": "custom_css",
-   "fieldtype": "Code",
-   "label": "Custom CSS",
-   "options": "CSS"
-  }
- ],
- "permissions": [
-  {
-   "role": "System Manager",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "delete": 1
-  },
-  {
-   "role": "Biz Service Administrator",
-   "read": 1,
-   "write": 1,
-   "create": 1,
-   "delete": 0
-  }
- ],
- "track_changes": 1
+    "name": "EthioBiz Theme",
+    "module": "EthioBiz Theme",
+    "custom": 1,
+    "docstatus": 0,
+    "doctype": "DocType",
+    "issingle": 1,
+    "fields": [
+        {
+            "fieldname": "section_branding",
+            "fieldtype": "Section Break",
+            "label": "Branding & General"
+        },
+        {
+            "fieldname": "app_name",
+            "fieldtype": "Data",
+            "label": "Platform Name",
+            "default": "EthioBiz"
+        },
+        {
+            "fieldname": "app_logo",
+            "fieldtype": "Attach Image",
+            "label": "App Logo"
+        },
+        {
+            "fieldname": "favicon",
+            "fieldtype": "Attach Image",
+            "label": "Favicon"
+        },
+        {
+            "fieldname": "copyright_text",
+            "fieldtype": "Data",
+            "label": "Copyright Text",
+            "default": "© 2026 EthioBiz. All rights reserved."
+        },
+        {
+            "fieldname": "footer_powered_by",
+            "fieldtype": "Data",
+            "label": "Footer Powered By",
+            "default": "Powered by Bismillah Technology"
+        },
+        {
+            "fieldname": "section_login",
+            "fieldtype": "Section Break",
+            "label": "Login Page"
+        },
+        {
+            "fieldname": "login_page_title",
+            "fieldtype": "Data",
+            "label": "Login Page Title"
+        },
+        {
+            "fieldname": "login_page_background_image",
+            "fieldtype": "Attach Image",
+            "label": "Background Image"
+        },
+        {
+            "fieldname": "login_page_background_color",
+            "fieldtype": "Color",
+            "label": "Background Color",
+            "default": "#FFFFFF"
+        },
+        {
+            "fieldname": "login_box_position",
+            "fieldtype": "Select",
+            "label": "Login Box Position",
+            "options": "Default\nLeft\nRight",
+            "default": "Default"
+        },
+        {
+            "fieldname": "login_box_background_color",
+            "fieldtype": "Color",
+            "label": "Login Box Background Color",
+            "default": "#FFFFFF"
+        },
+        {
+            "fieldname": "login_button_background_color",
+            "fieldtype": "Color",
+            "label": "Login Button Background Color",
+            "default": "#2490ef"
+        },
+        {
+            "fieldname": "login_button_text_color",
+            "fieldtype": "Color",
+            "label": "Login Button Text Color",
+            "default": "#FFFFFF"
+        },
+        {
+            "fieldname": "section_navbar",
+            "fieldtype": "Section Break",
+            "label": "Navbar & Navigation"
+        },
+        {
+            "fieldname": "navbar_color",
+            "fieldtype": "Color",
+            "label": "Navbar Background Color",
+            "default": "#FFFFFF"
+        },
+        {
+            "fieldname": "navbar_text_color",
+            "fieldtype": "Color",
+            "label": "Navbar Text Color",
+            "default": "#000000"
+        },
+        {
+            "fieldname": "hide_help_button",
+            "fieldtype": "Check",
+            "label": "Hide Help Button",
+            "default": 1
+        },
+        {
+            "fieldname": "hide_app_switcher",
+            "fieldtype": "Check",
+            "label": "Hide App Switcher"
+        },
+        {
+            "fieldname": "section_buttons",
+            "fieldtype": "Section Break",
+            "label": "Buttons & Primary Actions"
+        },
+        {
+            "fieldname": "button_background_color",
+            "fieldtype": "Color",
+            "label": "Primary Button BG Color",
+            "default": "#2490ef"
+        },
+        {
+            "fieldname": "button_text_color",
+            "fieldtype": "Color",
+            "label": "Primary Button Text Color",
+            "default": "#FFFFFF"
+        },
+        {
+            "fieldname": "section_workspace",
+            "fieldtype": "Section Break",
+            "label": "Workspace & Sidebar"
+        },
+        {
+            "fieldname": "body_background_color",
+            "fieldtype": "Color",
+            "label": "Body Background Color",
+            "default": "#F4F5F7"
+        },
+        {
+            "fieldname": "sidebar_background_color",
+            "fieldtype": "Color",
+            "label": "Sidebar Background Color",
+            "default": "#FFFFFF"
+        },
+        {
+            "fieldname": "sidebar_text_color",
+            "fieldtype": "Color",
+            "label": "Sidebar Text Color",
+            "default": "#000000"
+        },
+        {
+            "fieldname": "section_advanced",
+            "fieldtype": "Section Break",
+            "label": "Advanced & Custom"
+        },
+        {
+            "fieldname": "custom_css",
+            "fieldtype": "Code",
+            "label": "Custom CSS Overrides",
+            "options": "CSS"
+        }
+    ],
+    "index_loggable": 0,
+    "links": [],
+    "modified": "2026-01-10 19:34:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1
+        },
+        {
+            "role": "Biz Service Administrator",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 0
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "track_changes": 1
 }
