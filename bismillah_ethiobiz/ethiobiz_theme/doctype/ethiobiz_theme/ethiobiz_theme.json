@@ -28,10 +28,16 @@
             "label": "Favicon"
         },
         {
+            "fieldname": "primary_color",
+            "fieldtype": "Color",
+            "label": "Primary Color",
+            "default": "#2490ef"
+        },
+        {
             "fieldname": "copyright_text",
             "fieldtype": "Data",
             "label": "Copyright Text",
-            "default": "© 2026 EthioBiz. All rights reserved."
+            "default": "\u00a9 2026 EthioBiz. All rights reserved."
         },
         {
             "fieldname": "footer_powered_by",
@@ -50,14 +56,14 @@
             "label": "Login Page Title"
         },
         {
-            "fieldname": "login_page_background_image",
+            "fieldname": "login_bg_image",
             "fieldtype": "Attach Image",
-            "label": "Background Image"
+            "label": "Login Background Image"
         },
         {
-            "fieldname": "login_page_background_color",
+            "fieldname": "login_bg_color",
             "fieldtype": "Color",
-            "label": "Background Color",
+            "label": "Login Background Color",
             "default": "#FFFFFF"
         },
         {
@@ -68,19 +74,19 @@
             "default": "Default"
         },
         {
-            "fieldname": "login_box_background_color",
+            "fieldname": "login_box_bg",
             "fieldtype": "Color",
             "label": "Login Box Background Color",
             "default": "#FFFFFF"
         },
         {
-            "fieldname": "login_button_background_color",
+            "fieldname": "login_btn_bg",
             "fieldtype": "Color",
             "label": "Login Button Background Color",
             "default": "#2490ef"
         },
         {
-            "fieldname": "login_button_text_color",
+            "fieldname": "login_btn_color",
             "fieldtype": "Color",
             "label": "Login Button Text Color",
             "default": "#FFFFFF"
@@ -91,7 +97,7 @@
             "label": "Navbar & Navigation"
         },
         {
-            "fieldname": "navbar_color",
+            "fieldname": "navbar_bg_color",
             "fieldtype": "Color",
             "label": "Navbar Background Color",
             "default": "#FFFFFF"
@@ -119,13 +125,13 @@
             "label": "Buttons & Primary Actions"
         },
         {
-            "fieldname": "button_background_color",
+            "fieldname": "btn_primary_bg",
             "fieldtype": "Color",
             "label": "Primary Button BG Color",
             "default": "#2490ef"
         },
         {
-            "fieldname": "button_text_color",
+            "fieldname": "btn_primary_color",
             "fieldtype": "Color",
             "label": "Primary Button Text Color",
             "default": "#FFFFFF"
@@ -136,22 +142,20 @@
             "label": "Workspace & Sidebar"
         },
         {
-            "fieldname": "body_background_color",
+            "fieldname": "background_color",
             "fieldtype": "Color",
             "label": "Body Background Color",
             "default": "#F4F5F7"
         },
         {
-            "fieldname": "sidebar_background_color",
+            "fieldname": "sidebar_bg_color",
             "fieldtype": "Color",
-            "label": "Sidebar Background Color",
-            "default": "#FFFFFF"
+            "label": "Sidebar Background Color"
         },
         {
             "fieldname": "sidebar_text_color",
             "fieldtype": "Color",
-            "label": "Sidebar Text Color",
-            "default": "#000000"
+            "label": "Sidebar Text Color"
         },
         {
             "fieldname": "section_advanced",
@@ -167,7 +171,7 @@
     ],
     "index_loggable": 0,
     "links": [],
-    "modified": "2026-01-10 19:34:00.000000",
+    "modified": "2026-01-10 20:20:00.000000",
     "modified_by": "Administrator",
     "owner": "Administrator",
     "permissions": [
