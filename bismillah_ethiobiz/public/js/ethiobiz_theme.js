@@ -47,7 +47,7 @@ class EthioBizTheme {
 
     async loadTheme() {
         try {
-            const response = await fetch('/api/method/bismillah_ethiobiz.bismillah_ethiobiz.ethiobiz_theme.api.get_custom_theme');
+            const response = await fetch(`/api/method/bismillah_ethiobiz.ethiobiz_theme.api.get_custom_theme?v=${ts}`);
             const data = await response.json();
             this.themeData = data.message;
             if (this.themeData) {
@@ -151,6 +151,7 @@ class EthioBizTheme {
     }
 
     initLabelObserver() {
+        if (!this.themeData || !this.themeData.enable_light_label_fix) return;
         const renameFn = () => {
             const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
             let node;

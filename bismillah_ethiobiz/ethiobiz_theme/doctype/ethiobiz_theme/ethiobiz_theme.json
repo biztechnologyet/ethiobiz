@@ -163,6 +163,12 @@
             "label": "Advanced & Custom"
         },
         {
+            "fieldname": "enable_light_label_fix",
+            "fieldtype": "Check",
+            "label": "Enable 'Light' Label Fix",
+            "default": 1
+        },
+        {
             "fieldname": "custom_css",
             "fieldtype": "Code",
             "label": "Custom CSS Overrides",

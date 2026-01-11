@@ -14,7 +14,7 @@ app_include_css = [
 ]
 app_include_js = [
     "/assets/bismillah_ethiobiz/js/bismillah_ethiobiz.js",
-    "/assets/bismillah_ethiobiz/js/ethiobiz_theme.js"
+    "/assets/bismillah_ethiobiz/js/ethiobiz_theme.js?v=2.1"
 ]
 
 # Client-side bindings
