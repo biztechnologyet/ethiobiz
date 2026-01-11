@@ -165,9 +165,16 @@ class EthioBizTheme {
                 }
             }
 
-            // Re-check specific attributes like titles or aria-labels if needed
-            document.querySelectorAll('[title*="Frappe"]').forEach(el => {
-                el.title = el.title.replace('Frappe', 'EthioBiz');
+            // Enhanced attribute replacement for Dropdowns/Tooltips
+            const attrs = ['title', 'aria-label', 'data-label', 'data-value', 'alt', 'placeholder'];
+            attrs.forEach(attr => {
+                document.querySelectorAll(`[${attr}*="Frappe"]`).forEach(el => {
+                    let val = el.getAttribute(attr);
+                    if (val) {
+                        let newVal = val.replace('Frappe Light', 'Light').replace('Frappe', 'EthioBiz');
+                        if (val !== newVal) el.setAttribute(attr, newVal);
+                    }
+                });
             });
         };
 
