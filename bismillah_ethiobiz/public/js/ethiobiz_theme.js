@@ -47,7 +47,7 @@ class EthioBizTheme {
 
     async loadTheme() {
         try {
-            const response = await fetch(`/api/method/bismillah_ethiobiz.ethiobiz_theme.api.get_custom_theme?v=${ts}`);
+            const response = await fetch(`/api/method/bismillah_ethiobiz.ethiobiz_theme.api.get_custom_theme?v=${Date.now()}`);
             const data = await response.json();
             this.themeData = data.message;
             if (this.themeData) {
