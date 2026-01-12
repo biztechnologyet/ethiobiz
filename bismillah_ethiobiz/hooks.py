@@ -14,7 +14,15 @@ app_include_css = [
 ]
 app_include_js = [
     "/assets/bismillah_ethiobiz/js/bismillah_ethiobiz.js",
-    "/assets/bismillah_ethiobiz/js/ethiobiz_theme.js?v=2.1"
+    "/assets/bismillah_ethiobiz/js/ethiobiz_theme.js"
+]
+
+# include js, css files in header of web template (login, etc)
+web_include_css = [
+    "/assets/bismillah_ethiobiz/css/ethiobiz_theme.css"
+]
+web_include_js = [
+    "/assets/bismillah_ethiobiz/js/ethiobiz_theme.js"
 ]
 
 # Client-side bindings

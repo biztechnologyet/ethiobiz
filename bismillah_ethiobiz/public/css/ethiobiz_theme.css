@@ -4,13 +4,41 @@
  */
 
 :root {
-    --primary-color: #2490ef;
+    --primary-color: #2F6B4F;
+    /* Magala Earth Green */
+    --login-btn-bg: #2F6B4F;
+    --btn-primary-bg: #2F6B4F;
     --login-bg-color: #ffffff;
     --login-box-bg: #ffffff;
     --body-bg: #f4f5f7;
     --navbar-bg: #ffffff;
     --sidebar-bg: #ffffff;
+    --sidebar-text-color: #0E1A1A;
+    /* Obsidian Black */
     --hide-help: block;
+
+    /* Deep System Overrides - The "Nuclear Option" */
+    --primary: #2F6B4F !important;
+    --blue-500: #2F6B4F !important;
+    --text-color: #0E1A1A !important;
+    --text-muted: #6c757d !important;
+    /* Fix for dark text on dark bg issues */
+
+    /* Force Button Variables at Root Level */
+    --btn-default-bg: #F4F5F7 !important;
+    --btn-default-color: #0E1A1A !important;
+}
+
+/* 
+   CREATIVE FIX: Target all known Frappe button variations with extreme specificity 
+   including [data-theme] attributes which might be overriding :root 
+*/
+html[data-theme="light"] body,
+html[data-theme="dark"] body,
+body {
+    --primary-color: #2F6B4F !important;
+    --primary: #2F6B4F !important;
+    --blue-500: #2F6B4F !important;
 }
 
 /* Login Page Base */
@@ -65,19 +93,35 @@
 }
 
 /* Buttons */
+/* Buttons - High Specificity "Nuclear" Overrides */
 .btn-primary,
-.primary-action {
-    background-color: var(--btn-primary-bg, var(--primary-color)) !important;
-    border-color: var(--btn-primary-bg, var(--primary-color)) !important;
-    color: var(--btn-primary-color, #ffffff) !important;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+.primary-action,
+.page-actions .btn-primary,
+.standard-actions .btn-primary,
+.modal .btn-primary,
+.grid-footer .btn-primary,
+button[data-label="Save"],
+button[data-label="Create"],
+button[data-label="Submit"],
+button[data-label="Update"],
+.btn.btn-primary {
+    background-color: #2F6B4F !important;
+    /* Hardcode Hex to bypass broken vars */
+    border-color: #2F6B4F !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    /* For SVGs inside buttons */
 }
 
+/* Hover States */
 .btn-primary:hover,
-.primary-action:hover {
-    filter: brightness(1.1);
-    transform: translateY(-1px);
+.primary-action:hover,
+.page-actions .btn-primary:hover,
+button[data-label="Save"]:hover,
+button[data-label="Create"]:hover {
+    background-color: #265941 !important;
+    /* Slightly darker shade */
+    border-color: #265941 !important;
 }
 
 /* Sidebar */

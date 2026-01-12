@@ -67,7 +67,12 @@ class EthioBizTheme {
         const t = this.themeData;
 
         // Core Branding
-        if (t.primary_color) root.style.setProperty('--primary-color', t.primary_color);
+        // Core Branding
+        if (t.primary_color) {
+            root.style.setProperty('--primary-color', t.primary_color);
+            root.style.setProperty('--primary', t.primary_color);
+            root.style.setProperty('--blue-500', t.primary_color); // Force Override Default Blue
+        }
 
         // Login Page
         const loginBg = t.login_bg_color || t.login_page_background_color || t.background_color;
@@ -98,7 +103,7 @@ class EthioBizTheme {
 
         // Navbar
         const navBg = t.navbar_bg_color || t.navbar_color;
-        if (navBg) root.style.setProperty('--navbar-bg', navBg);
+        if (navBg) root.style.setProperty('--navbar-bg', navBg); // This might be redundant with t.navbar_bg above
 
         if (t.navbar_text_color) root.style.setProperty('--navbar-color', t.navbar_text_color);
         if (t.hide_help_button) root.style.setProperty('--hide-help', 'none');
@@ -115,12 +120,127 @@ class EthioBizTheme {
         if (bodyBg) root.style.setProperty('--body-bg', bodyBg);
 
         const sidebarBg = t.sidebar_bg_color || t.sidebar_background_color;
-        if (sidebarBg) root.style.setProperty('--sidebar-bg', sidebarBg);
+        if (sidebarBg) root.style.setProperty('--sidebar-bg', sidebarBg); // This might be redundant with t.sidebar_bg above
 
         if (t.sidebar_text_color) root.style.setProperty('--sidebar-text-color', t.sidebar_text_color);
 
         this.revealLoginBox();
         this.updateLogo();
+        this.forceApplyStyles();
+    }
+
+    updateLogo() {
+        if (this.themeData?.app_logo) {
+            const logoSelectors = [
+                '.navbar-brand img',
+                '.app-logo',
+                'img[src*="/assets/frappe/images/frappe-framework-logo.svg"]'
+            ];
+
+            logoSelectors.forEach(sel => {
+                const els = document.querySelectorAll(sel);
+                els.forEach(el => {
+                    // Avoid replacing if already set to avoid flicker loop if observer used later
+                    if (el && el.src && el.src.indexOf(this.themeData.app_logo) === -1) {
+                        el.src = this.themeData.app_logo;
+                        // Also set style to ensure visibility if hidden by default
+                        el.style.display = 'inline-block';
+                        el.style.maxHeight = '30px'; // Standard height
+                    }
+                });
+            });
+        }
+
+        if (this.themeData?.app_name) {
+            const brands = document.querySelectorAll('.navbar-brand span, .nav-brand-area .app-name');
+            brands.forEach(b => {
+                b.textContent = this.themeData.app_name;
+            });
+        }
+    }
+
+    forceApplyStyles() {
+        console.log("EthioBiz Internal: Force Applying Safety CSS");
+        const styleId = 'ethiobiz-nuclear-css';
+        let style = document.getElementById(styleId);
+        if (!style) {
+            style = document.createElement('style');
+            style.id = styleId;
+            document.head.appendChild(style);
+        }
+
+        // MAGALA GREEN HARDCODED SAFETY NET
+        style.innerHTML = `
+            :root {
+                --primary-color: #2F6B4F !important;
+                --primary: #2F6B4F !important;
+                --blue-500: #2F6B4F !important;
+                --text-color: #0E1A1A !important;
+            }
+            .btn-primary, 
+            .primary-action, 
+            button[data-label="Save"], 
+            button[data-label="Create"],
+            button[data-label="Submit"],
+            button[data-label="Update"],
+            button.btn-primary {
+                background-color: #2F6B4F !important;
+                border-color: #2F6B4F !important;
+                color: #ffffff !important;
+                fill: #ffffff !important;
+            }
+            .btn-primary:hover,
+            button[data-label="Save"]:hover {
+                background-color: #265941 !important;
+            }
+        `;
+    }
+    collapseSidebar() {
+        if (!this.themeData || !this.themeData.hide_sidebar) return;
+
+        // Function to attempt collapse
+        const attemptCollapse = () => {
+            // 1. Try standard trigger
+            const toggleBtn = document.querySelector('.sidebar-toggle-btn');
+            const sidebar = document.querySelector('.layout-side-section');
+
+            // Only click if sidebar is visible (width > 0 under standard conditions)
+            if (sidebar && toggleBtn && !document.body.classList.contains('sidebar-collapsed')) {
+                // Check if actually expanded? Frappe doesn't standardly have a class for expanded/collapsed on body usually, 
+                // but checking offsetWidth is a good proxy.
+                if (sidebar.getBoundingClientRect().width > 10) {
+                    console.log("EthioBiz: Collapsing Sidebar via Click");
+                    toggleBtn.click();
+                }
+            }
+
+            // 2. Try Standard Mobile/Desk Sidebar (if different)
+            if (frappe.app && frappe.app.sidebar && frappe.app.sidebar.toggle_sidebar) {
+                // API method if available (rare in public API)
+            }
+        };
+
+        // Attempt immediately
+        attemptCollapse();
+
+        // Creative Fix: "The Poller"
+        // Aggressively check every 500ms for the first 5 seconds of page load
+        // because Frappe sometimes renders the sidebar LATE.
+        let checks = 0;
+        const maxChecks = 10;
+        const poller = setInterval(() => {
+            checks++;
+            const sidebar = document.querySelector('.layout-side-section');
+            const toggleBtn = document.querySelector('.sidebar-toggle-btn');
+
+            // If sidebar exists and is WIDE (expanded), click it.
+            if (sidebar && sidebar.getBoundingClientRect().width > 20 && toggleBtn) {
+                console.log("EthioBiz Poller: Force Collapsing Sidebar");
+                toggleBtn.click();
+            }
+
+            if (checks >= maxChecks) clearInterval(poller);
+        }, 500);
     }
 
     revealLoginBox() {
@@ -152,6 +272,18 @@ class EthioBizTheme {
 
     initLabelObserver() {
         if (!this.themeData || !this.themeData.enable_light_label_fix) return;
+
+        // Add observer for Route Changes to re-apply collapse
+        if (typeof frappe !== 'undefined' && frappe.router) {
+            frappe.router.on('change', () => {
+                this.updateLogo(); // Re-check logo
+                this.forceApplyStyles(); // Re-force CSS
+                if (this.themeData && this.themeData.hide_sidebar) {
+                    this.collapseSidebar();
+                }
+            });
+        }
+
         const renameFn = () => {
             const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
             let node;
@@ -178,9 +310,49 @@ class EthioBizTheme {
             });
         };
 
-        renameFn();
-        const observer = new MutationObserver(renameFn);
-        observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+        renameFn(); // Initial run
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                // Rename Labels
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach((node) => {
+                        this.processNode(node);
+                    });
+                }
+                // Also check text content changes
+                if (mutation.type === 'characterData') {
+                    this.processNode(mutation.target);
+                }
+            });
+        });
+        observer.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true });
+    }
+
+    processNode(node) {
+        // Text Replacement Logic
+        if (node.nodeType === 3) { // Text Node
+            let text = node.nodeValue;
+            if (text && text.includes('Frappe Light')) {
+                node.nodeValue = text.replace('Frappe Light', 'EthioBiz Light'); // Explicit Rename
+            }
+        }
+        // Element Attributes
+        if (node.nodeType === 1) { // Element
+            // Check attributes
+            ['title', 'aria-label', 'data-label', 'data-value', 'alt', 'placeholder'].forEach(attr => {
+                if (node.hasAttribute(attr)) {
+                    let val = node.getAttribute(attr);
+                    if (val && val.includes('Frappe Light')) {
+                        node.setAttribute(attr, val.replace('Frappe Light', 'EthioBiz Light'));
+                    }
+                }
+            });
+            // Subtree
+            if (node.childNodes.length > 0) {
+                node.childNodes.forEach(child => this.processNode(child));
+            }
+        }
     }
 }
 
