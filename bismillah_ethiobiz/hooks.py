@@ -58,3 +58,7 @@ fixtures = [
     "Property Setter",
     "Custom Field"
 ]
+
+# Boot Injection
+# --------------
+extend_bootinfo = "bismillah_ethiobiz.bismillah_ethiobiz.boot.boot_session"
