@@ -10,7 +10,8 @@ app_license = "MIT"
 
 # include js, css files in header of desk.html
 app_include_css = [
-    "/assets/bismillah_ethiobiz/css/ethiobiz_theme.css"
+    "/assets/bismillah_ethiobiz/css/ethiobiz_theme.css",
+    "/assets/bismillah_ethiobiz/css/generated_theme.css"
 ]
 app_include_js = [
     "/assets/bismillah_ethiobiz/js/bismillah_ethiobiz.js",
@@ -19,7 +20,8 @@ app_include_js = [
 
 # include js, css files in header of web template (login, etc)
 web_include_css = [
-    "/assets/bismillah_ethiobiz/css/ethiobiz_theme.css"
+    "/assets/bismillah_ethiobiz/css/ethiobiz_theme.css",
+    "/assets/bismillah_ethiobiz/css/generated_theme.css"
 ]
 web_include_js = [
     "/assets/bismillah_ethiobiz/js/ethiobiz_theme.js"

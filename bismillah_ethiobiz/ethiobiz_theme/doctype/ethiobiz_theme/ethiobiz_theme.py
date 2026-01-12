@@ -53,3 +53,4 @@ class EthioBizTheme(Document):
         # Ensure the CSS is regenerated
         self.generate_theme_css()
         frappe.clear_cache()
+        frappe.publish_realtime("ethiobiz_theme_updated", message="Theme Updated")

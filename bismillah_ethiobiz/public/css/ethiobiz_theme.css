@@ -105,12 +105,10 @@ button[data-label="Create"],
 button[data-label="Submit"],
 button[data-label="Update"],
 .btn.btn-primary {
-    background-color: #2F6B4F !important;
-    /* Hardcode Hex to bypass broken vars */
-    border-color: #2F6B4F !important;
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
     color: #ffffff !important;
     fill: #ffffff !important;
-    /* For SVGs inside buttons */
 }
 
 /* Hover States */

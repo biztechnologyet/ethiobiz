@@ -25,6 +25,14 @@ class EthioBizTheme {
 
             // 4. Start label observer
             this.initLabelObserver();
+
+            // 5. RT Listener
+            if (frappe && frappe.realtime) {
+                frappe.realtime.on("ethiobiz_theme_updated", () => {
+                    console.log("EthioBiz Theme: Update Detected!");
+                    this.loadTheme().then(() => this.applyTheme());
+                });
+            }
         } catch (error) {
             console.error("EthioBiz Theme Error:", error);
             this.revealLoginBox();
@@ -161,6 +169,12 @@ class EthioBizTheme {
 
     forceApplyStyles() {
         console.log("EthioBiz Internal: Force Applying Safety CSS");
+
+        // Dynamic Color Resolution
+        const t = this.themeData || {};
+        const primaryColor = t.primary_color || '#2F6B4F'; // Magala Green Default
+        const textColor = t.text_color || '#0E1A1A';
+
         const styleId = 'ethiobiz-nuclear-css';
         let style = document.getElementById(styleId);
         if (!style) {
@@ -169,13 +183,13 @@ class EthioBizTheme {
             document.head.appendChild(style);
         }
 
-        // MAGALA GREEN HARDCODED SAFETY NET
+        // Dynamic Injection
         style.innerHTML = `
             :root {
-                --primary-color: #2F6B4F !important;
-                --primary: #2F6B4F !important;
-                --blue-500: #2F6B4F !important;
-                --text-color: #0E1A1A !important;
+                --primary-color: ${primaryColor} !important;
+                --primary: ${primaryColor} !important;
+                --blue-500: ${primaryColor} !important;
+                --text-color: ${textColor} !important;
             }
             .btn-primary, 
             .primary-action, 
@@ -184,14 +198,14 @@ class EthioBizTheme {
             button[data-label="Submit"],
             button[data-label="Update"],
             button.btn-primary {
-                background-color: #2F6B4F !important;
-                border-color: #2F6B4F !important;
+                background-color: ${primaryColor} !important;
+                border-color: ${primaryColor} !important;
                 color: #ffffff !important;
                 fill: #ffffff !important;
             }
             .btn-primary:hover,
             button[data-label="Save"]:hover {
-                background-color: #265941 !important;
+                filter: brightness(0.9);
             }
         `;
     }

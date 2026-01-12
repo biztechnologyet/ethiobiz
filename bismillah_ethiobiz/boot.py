@@ -2,21 +2,28 @@ import frappe
 
 def boot_session(bootinfo):
     """
-    Inject Magala Green branding directly into the boot session.
-    This ensures it loads immediately, even if static assets fail.
+    Inject Dynamic Theme branding directly into the boot session.
+    Reads from 'EthioBiz Theme' DocType to support user changes.
     """
-    bootinfo.ethiobiz_theme_css = """
+    try:
+        # Fetch Settings (Uncached or Cached)
+        # Using db.get_value is faster than get_doc
+        primary_color = frappe.db.get_value("EthioBiz Theme", "EthioBiz Theme", "primary_color") or "#2F6B4F"
+    except Exception:
+        primary_color = "#2F6B4F"
+
+    bootinfo.ethiobiz_theme_css = f"""
     <style id="ethiobiz-boot-css">
-        :root {
-            --primary-color: #2F6B4F !important;
-            --primary: #2F6B4F !important;
-            --blue-500: #2F6B4F !important;
+        :root {{
+            --primary-color: {primary_color} !important;
+            --primary: {primary_color} !important;
+            --blue-500: {primary_color} !important;
             --text-color: #0E1A1A !important;
             
             /* Button Overrides */
-            --btn-primary-bg: #2F6B4F !important;
+            --btn-primary-bg: {primary_color} !important;
             --btn-primary-color: #ffffff !important;
-        }
+        }}
         
         /* Direct Button Targeting */
         .btn-primary, 
@@ -25,22 +32,17 @@ def boot_session(bootinfo):
         button[data-label="Create"],
         button[data-label="Submit"],
         button[data-label="Update"],
-        button.btn-primary {
-            background-color: #2F6B4F !important;
-            border-color: #2F6B4F !important;
+        button.btn-primary {{
+            background-color: {primary_color} !important;
+            border-color: {primary_color} !important;
             color: #ffffff !important;
             fill: #ffffff !important;
-            background-image: none !important; /* Remove gradients */
-        }
+            background-image: none !important;
+        }}
         
         .btn-primary:hover,
-        button[data-label="Save"]:hover {
-            background-color: #265941 !important;
-        }
-
-        /* Sidebar Fix */
-        .sidebar-item-label {
-             /* Ensure visibility */
-        }
+        button[data-label="Save"]:hover {{
+            filter: brightness(0.9);
+        }}
     </style>
     """
